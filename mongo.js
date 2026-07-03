@@ -6,19 +6,33 @@ const url = process.env.MONGODB_URI
 mongoose.set('strictQuery', false)
 mongoose.connect(url, { family: 4 })
 
-const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean
+const password = process.argv[2]
+const name = process.argv[3]
+const number = process.argv[4]
+
+const phonebookSchema = new mongoose.Schema({
+  name: String,
+  number: String
 })
 
-const Note = mongoose.model('Note', noteSchema)
+const Person = mongoose.model('persons', phonebookSchema)
 
-const note = new Note({
-  content: 'HTML is easy',
-  important: true
-})
+if (name && number) {
+  const person = new Person({
+    name: name,
+    number: number
+  })
 
-note.save().then((result) => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+  person.save().then((result) => {
+    console.log(`added ${name} number ${number} to phonebook`)
+    mongoose.connection.close()
+  })
+} else {
+  Person.find({}).then((result) => {
+    console.log('phonebook:')
+    result.forEach((person) => {
+      console.log(`${person.name} ${person.number}`)
+    })
+    mongoose.connection.close()
+  })
+}
