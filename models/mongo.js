@@ -1,17 +1,23 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
+
 const url = process.env.MONGODB_URI
+
+console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI)
+console.log('Connecting to MongoDB...')
 
 mongoose.set('strictQuery', false)
 
 mongoose
   .connect(url, { family: 4 })
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('✅ Connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
+    console.error('❌ MongoDB connection failed:')
+    console.error(error)
   })
+  
 const personSchema = new mongoose.Schema({
   name: { type: String, minlength: 3, required: true },
   number: {
