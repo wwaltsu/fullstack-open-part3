@@ -76,15 +76,26 @@ app.post('/api/persons', (request, response, next) => {
   if (!body.number) {
     return response.status(400).json({ error: 'number missing' })
   }
-  const person = new Person({
-    name: body.name,
-    number: body.number
-  })
 
-  person
-    .save()
+  Person.findOne({ name: body.name })
+    .then((existingPerson) => {
+      if (existingPerson) {
+        return response.status(400).json({
+          error: 'name must be unique'
+        })
+      }
+
+      const person = new Person({
+        name: body.name,
+        number: body.number
+      })
+
+      return person.save()
+    })
     .then((savedPerson) => {
-      response.json(savedPerson)
+      if (savedPerson) {
+        response.json(savedPerson)
+      }
     })
     .catch((error) => next(error))
 })
@@ -109,7 +120,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
-  Person.findOneAndDelete(request.params.id)
+  Person.findByIdAndDelete(request.params.id)
     .then(() => {
       response.status(204).end()
     })
