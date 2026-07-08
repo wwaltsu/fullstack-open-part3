@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
   number: String
 })
 
-const Person = mongoose.model('persons', personSchema)
+const Person = mongoose.model('Person', personSchema)
 
 if (name && number) {
   const person = new Person({
