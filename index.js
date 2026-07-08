@@ -1,4 +1,4 @@
-const Person = require('./models/mongo')
+const Person = require('./models/person')
 const express = require('express')
 const app = express()
 var morgan = require('morgan')

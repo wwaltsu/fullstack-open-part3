@@ -13,51 +13,78 @@ Content-Type: application/json
 
 ###
 
-# Delete person with ID 1
-DELETE http://localhost:3001/api/persons/1 HTTP/1.1
-Content-Type: application/json
-
-###
-
 # Get all persons
 GET http://localhost:3001/api/persons HTTP/1.1
 Content-Type: application/json
 
 ###
 
-# Get person with ID 3
-GET http://localhost:3001/api/persons/3 HTTP/1.1
+# Get person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+GET http://localhost:3001/api/persons/PERSON_ID HTTP/1.1
 Content-Type: application/json
 
 ###
+
+# Update person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+PUT http://localhost:3001/api/persons/PERSON_ID HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Jon Doe Updated",
+  "number": "09-999999"
+}
+
+###
+
+# Delete person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+DELETE http://localhost:3001/api/persons/PERSON_ID HTTP/1.1
+
+###
+
 
 # ==========================
 # Render API requests
 # ==========================
 
 # Create a new person
-POST http://render-test-bezw.onrender.com/api/persons HTTP/1.1
+POST https://render-test-bezw.onrender.com/api/persons HTTP/1.1
 Content-Type: application/json
 
 {
   "name": "Jon Doe",
-  "number": "424243"
+  "number": "09-123123"
 }
 
 ###
 
-# Delete person with ID 1
-DELETE http://render-test-bezw.onrender.com/api/persons/1 HTTP/1.1
-Content-Type: application/json
-
-###
-
 # Get all persons
-GET http://render-test-bezw.onrender.com/api/persons HTTP/1.1
+GET https://render-test-bezw.onrender.com/api/persons HTTP/1.1
 Content-Type: application/json
 
 ###
 
-# Get person with ID 3
-GET http://render-test-bezw.onrender.com/api/persons/3 HTTP/1.1
+# Get person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+GET https://render-test-bezw.onrender.com/api/persons/PERSON_ID HTTP/1.1
 Content-Type: application/json
+
+###
+
+# Update person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+PUT https://render-test-bezw.onrender.com/api/persons/PERSON_ID HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Jon Doe Updated",
+  "number": "09-999999"
+}
+
+###
+
+# Delete person by MongoDB id
+# Replace PERSON_ID with real id from GET /api/persons response
+DELETE https://render-test-bezw.onrender.com/api/persons/PERSON_ID HTTP/1.1
